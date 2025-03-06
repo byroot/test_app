@@ -50,8 +50,20 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Restore Rubocop Cache
+        uses: actions/cache/restore@v4
+        with:
+          path: /tmp/rubocop-cache
+          key: rubocop
+
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        run: bin/rubocop -f github --cache-root /tmp/rubocop-cache
+
+      - name: Save Rubocop Cache
+        uses: actions/cache/save@v4
+        with:
+          path: /tmp/rubocop-cache
+          key: rubocop
 
   test:
     runs-on: ubuntu-latest
