@@ -54,7 +54,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: /tmp/rubocop-cache
-          key: rubocop
+          key: rubocop-v2
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github --cache-root /tmp/rubocop-cache
@@ -63,7 +63,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: /tmp/rubocop-cache
-          key: rubocop
+          key: rubocop-v2
 
   test:
     runs-on: ubuntu-latest
